@@ -1,0 +1,557 @@
+\documentclass{mwart}
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{polish}
+
+% https://unix.stackexchange.com/questions/162305/find-the-best-font-for-rendering-a-codepoint
+% fc-search-codepoint
+%\setmonofont[Mapping=tex-text]{FreeMono}
+%\setmonofont[Mapping=tex-text]{DejaVuSansMono}
+\setmonofont[Mapping=tex-text]{Junicode}
+
+\usepackage{url}
+
+\def\key#1{\textbf{#1}}
+
+\title{djview4poliqarp}
+\author{Janusz S. Bień}
+
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+Program jest przede wszystkim graficznym zdalnym klientem serwera
+oprogramowania korpusowego \textsf{Poliqarp for DjVu}; jako taki
+stanowi modyfikację przeglądarki \textsf{djview4}
+(\url{http://djvu.sourceforge.net/djview4.html}). Dodatkowo w 2017
+r. program został rozbudowany o obsługę indeksów do dokumentów
+w~formacie DjVu.
+
+Postać kwerend służących do wyszukiwania w korpusach jest
+udokumentowana w innych tekstach, między innymi
+w~\url{http://nkjp.pl/poliqarp/help/pl.html} i
+\url{http://poliqarp.sourceforge.net/man/poliqarp-query-syntax.html}.
+Przykłady użycia można znaleźć m.in. w artykułach i prezentacjach
+dostępnych do 30 czerwca 2018 r. w Bibliotece Cyfrowej Katedry
+Lingwistyki Formalnej Uniwersytetu Warszawskiego
+(\url{http://bc.klf.uw.edu.pl/}); ich lokalizacja po tej dacie nie
+jest jeszcze znana.
+
+\section{Konfiguracja}
+\label{sec:konfiguracja}
+
+\subsection{Serwery}
+\label{sec:serwery}
+
+Program jest dystrybuowany w postaci częściowo skonfigurowanej, w
+szczególności dostępne są od razu adresy serwerów \textsf{Poliqarp for
+  DjVu}, które oczywiście w razie potrzeby możemy zmienić w panelu
+\texttt{Ustawienia --- Skonfiguruj --- Serwery}; adres serwera można
+(trzeba?)  podać w postaci samej nazwy domenowej bez oznaczenia
+protokołu.
+
+Warto dodać, że oprogramowanie serwera i narzędzia do budowy korpusów
+są dostępne na otwartych licencjach, zainteresowani mogą więc tworzyć
+własne korpusy i serwery.
+
+\subsection{Dodatkowe możliwości przeglądania plików DjVu}
+\label{sec:dodatk-moliw-przegld}
+
+Ponieważ funkcje programu są nieco inne niż przeglądarki
+\textsf{djview4}, istnieje możliwość łatwego uruchomienia
+\textsf{djview4} dla aktualnie oglądanego tekstu. Dla poprawnego
+działania tej funkcji w wersji dla MS Windows jest niezbędne wskazanie
+lokalizacji programu \textsf{djview4} w panelu \texttt{Ustawienia ---
+  Skonfiguruj --- Ogólne}.
+
+\subsection{Wygląd}
+\label{sec:wygld}
+
+Można wskazać język interfejsu na 3 sposoby:
+\begin{itemize}
+\item język systemu
+\item polski
+\item angielski
+\end{itemize}
+Efekt zmiany jest widoczny dopiero po ponownym uruchomieniu programu.
+
+Można też wybrać kolor wyróżnienia wyników wyszukiwania.
+% a co z innymi?
+
+\subsection{Font}
+\label{sec:font}
+
+Można wybrać font używany do wyswietlania wyników tekstowych i
+niektórych innych informacji w celu zmiany jego rozmiaru lub
+repertuaru znaków. Rekomendowane są fonty zgodne z rekomendacjami
+Medieval Unicode Font Initiative, np. \textsl{Junicode}.
+
+Niektóre informacje są wyświetlane jednak zawsze z wykorzystaniem
+domyślnego fontu systemu.
+
+\subsection{Podgląd graficzny}
+\label{sec:podgld-graficzny}
+
+Można zmienić domyślną wysokość okienka podglądu wyników w panelu
+bocznym.
+
+Mozna również zmienić domyślną wartość powiększenia lupy.
+
+\subsection{Dokument powitalny}
+\label{sec:dokument-powitalny}
+
+Można wskazać dokument, który zostanie wyświetlony w panelu głównym po
+uruchomieniu programu. Możliwość w praktyce przydatna w razie
+dystrybucji programu z odpowiednim dokumentem --- dotąd z tej
+możliwości nie korzystano.
+
+\subsection{Wprowadzanie znaków specjalnych}
+\label{sec:wprow-znak-specj}
+Można zdefiniować podstawienia ułatwiające wprowadzenia do pola
+kwerend i do indeksu znaków niedostępnych na klawiaturze. Na przykład
+poniższe podstawienie
+\begin{verbatim}
+/#=⸗
+\end{verbatim}
+umożliwia wprowadzanie znaku \texttt{DOUBLE OBLIQUE HYPHEN} jako
+\texttt{/\#}. Analogicznie znak \texttt{SOFT HYPHEN} można wprowadzać
+jako np. \texttt{/-}.
+
+\subsection{Korzystanie z plików lokalnych}
+\label{sec:korzystanie-z-plikow}
+
+W celu przyspieszenia działania programu i uniezależnienia się od
+serwera korpusu (jest to w pelni możliwe tylko przy korzystaniu z
+samego indeksu) można pobrać odpowiednie dokumenty na dysk lokalny i
+podać ich lokalizację za pomocą odpowiedniego podstawienia. Na
+przykład jeśli na komputerze z systemem Linux pierwszy tom słownika
+Lindego znajduje się w katalogu \texttt{/var/cache/Linde/1}, to
+odpowiednie podstawienie powinno mieć postać
+\begin{verbatim}
+http://korpusy.klf.uw.edu.pl/djvus/linde-t/01/=file:///var/cache/Linde/1/
+\end{verbatim}
+
+Należy pamietać, że w przypadku słowników mamy z reguły do czynienia z
+tzw. dokumentami rozłożonymi. Najprostszy sposób ich pobrania to
+otworzenie w programie \textsf{djview} za pomocą \texttt{Open
+  Location}, a następnie użycie \texttt{Save As}.
+
+\subsection{Indeksy}
+\label{sec:indeksy} 
+
+Obsługa korpusów pojawiła się w 2017 r. w wersji 1.3. Początkowo
+dokładnie jeden indeks był przypisany do konkretnego korpusu, obecnie
+wybór indeksu lub indeksów jest niezależny od korpusu.
+
+Indeksy to pliki tekstowe, hasła są reprezentowane przez wiersze
+zawierające pola oddzielone średnikami. Początkowo indeksy miały trzy
+pola, obecnie jest ich cztery (indeksy trzypolowe są nadal
+akceptowane, czwarte pole traktuje się jako puste).
+
+Aktualnie pola indeksu są następujące:
+\begin{enumerate}
+\item wyrażenie hasłowe --- służy do wyszukiwania i szeregowania
+  haseł, wyświetlane w panelu listy haseł;
+\item adres zaznaczenia w dokumencie DjVu, wyświetla się ono w panelu
+  głównym po wybraniu hasła --- pole może być puste, wtedy wyrazenie
+  hasłowe jest wyświetlone kursywą;
+\item komentarz --- pole może być puste, po wybraniu hasla wyświetla
+  sie pod panelem listy haseł (we wcześniej wersji hasło nie
+  wyświetlało się, jesli pierwszym znakiem był wykrzyknik);
+\item opis --- wyświetla się za wyrażeniem hasłowym, ale nie wpływa na
+  ich porządkowanie czy wyszukiwanie, stosowane np. do róznicowania
+  homonimów.
+\end{enumerate}
+
+Aktualnie dostępny jest indeks do słownika Lindego, patrz
+\url{https://bitbucket.org/jsbien/ilindecsv}. Nowe indeksy można łatwo
+tworzyć samodzielnie dzięki odpowiednim funkcjom programu. 
+
+\section{Użytkowanie}
+\label{sec:uytkowanie}
+
+Sposób korzystania z programu jest dość oczywisty, najważniejsze
+funkcje są dostępne w menu głównym oraz w podręcznych menu.
+
+Skróty klawiaturowe są w dużym stopniu odziedziczone po programach
+\textsf{djview4} i \textsf{djview3} Były one opisane w instrukcji do
+tzw. wydania elektronicznego DjVuLibre słownika Knapskiego z 2005 r.;
+ponieważ jest ona obecnie niedostępna, prawie bez zmian jest ona
+powtórzona dalej (właściwy słownik jest nadal dostępny w e-BUW).
+% http://ebuw.uw.edu.pl/publication/289334
+% por. \url{http://old.mimuw.edu.pl/polszczyzna/Knapski/Knapski_DjVu/djvul.html}).
+Zaproponowana wtedy terminologia nie jest --- jak się wydaje ---
+powszechnie akceptowana.
+
+\subsection{Panel główny}
+\label{sec:panel-gowny}
+
+Panel główny służy do przeglądania dokumentu DjVu, w szczególności do
+oglądania wyniku wyszukiwania za pomocą kwerendy lub indeksu.
+
+\begin{itemize}
+  
+\item Rozkład tekstu na ekranie:
+  \begin{itemize}
+  \item Ciągłe wyswietlanie stron: \key{F4}.
+  \item Wyświetlanie stron obok siebie: \key{F5}.
+
+    Wyświetlana para stron z reguły nie odpowiada tzw. rozkładówką
+    oryginału: wyświetlają się strony 1-2, 3-4, a nie 2-3, 4-5 itd. W
+    razie potrzeby wyswietlania rozkładówek należy skorzystać z
+    programu \textsf{djview}, w którym taka funkcja jest dostępna.
+  \end{itemize}
+\item Skalowanie (ang. \textit{zoom}), większość poniższych operacji
+  dostępna również z menu:
+  \begin{itemize}
+  \item Skalowanie względne
+    \begin{itemize}
+    \item na szerokość strony: \key{w} (od angielskiego \textit{Fit
+\textbf{w}idth})
+    \item na rozmiar strony: \key{p} (od angielskiego \textit{Fit
+\textbf{p}age})
+    \end{itemize}
+  \item Skalowanie bezwzględne
+    \begin{itemize}
+    \item 100~\%: \key{1}
+    \item 200~\%: \key{2}
+    \item 300~\%: \key{3}
+      % do sprawdzenia w źródłach!:
+    \item kolejno 150~\%, 300~\%, 450~\% itp.: \key{+}
+      % do sprawdzenia w źródłach!:
+    \item kolejno 75~\%, 50~\%, 25~\% itp.: \key{-}
+    \end{itemize}
+  \item Skalowanie płynne: rolka myszy przy wciśnietym \key{Ctrl}.
+  \item Lupa (ang. \textit{lens}): \key{Ctrl} razem z
+    \key{Shift}. Lupa wyświetla zawsze obraz nawet jeśli włączone jest
+    wyświetlanie tekstu ukrytego.
+\end{itemize}
+  \item Pozycjonowanie (ang. \textit{panning} i inne)
+    \begin{itemize}
+    \item Początek strony (górny lewy róg): \key{Home}
+    \item Koniec strony (dolny lewy róg): \key{End}
+    \item Przesunięcie strony w dół (kursora w górę): \key{Up}
+    \item Przesunięcie strony w górę (kursora w dół): \key{Down}
+    \item Przesunięcie strony w lewo (kursora w prawo): \key{Right}
+    \item Przesunięcie strony w prawo (kursora w lewo): \key{Left}
+    \item Przesunięcie strony myszą w dowolnym kierunku po naciśnięciu
+lewego klawisza
+   \item Skalowanie płynne w pionie: rolka myszy.
+    \end{itemize}
+  \item Przewijanie (ang. \textit{scrolling})
+    \begin{itemize}
+    \item Przewinięcie do przodu (tekst w górę, kursor w dół, w razie
+potrzeby przejście do następnej strony): \key{Space}
+    \item Przewinięcie do tyłu (tekst w dół, kursor w górę, w razie
+potrzeby przejście do poprzedniej strony): \key{Backspace}
+    \end{itemize}
+  \item Nawigacja, poniższe operacje są dostępne również z menu:
+    \begin{itemize}
+    \item Następna strona (zachowuje aktualną pozycję strony w oknie): \key{Page Down}
+    \item Poprzednia strona (zachowuje aktualną pozycję strony w oknie): \key{Page Up}
+    \item Początek dokumentu: \key{Ctrl} + \key{Home}
+    \item Koniec dokumentu: \key{Ctrl} + \key{End}
+    \end{itemize}
+  \item Obrót
+    \begin{itemize}
+    \item Obrót 90° w lewo (w kierunku przeciwnym do ruchu wskazówek
+      zegara): \key{Ctrl}+\key{Left}.
+    \item Obrót 90° w prawo (w kierunku zgodnym z ruchem wskazówek
+      zegara): \key{Ctrl}+\key{Left}.
+    \end{itemize}
+  \item Zaznaczanie:
+    \begin{itemize}
+    \item Wciśnięcie klawisza \key{Ctrl} i lewego klawisza myszy
+      pozwala zaznaczyć prostokątny fragment skanu, a następnie wybrać z
+      menu podręcznego odpowiednią operację:
+      \begin{itemize}
+      \item Powiększ zaznaczenie
+      \item ,,Kopiuj odnośnik'' czyli umieść w schowku adres tego zaznaczenia
+      \item Kopiuj tekst ukryty pod zaznaczeniem
+      \item Kopiuj zaznaczony fragment skanu
+      \item Zapisz zaznaczony fragment skanu
+      \item Dodaj hasło do indeksu (indeks musi być aktualnie otwarty,
+        pierwsze pole jest wstępnie wypełnione przez tekst ukryty,
+        drugie zawiera URL zaznaczenia)
+      \item Uaktualnij hasło (URL zaznaczenia zastępuje odpowiednie pole w bieżącym haśle)
+      \end{itemize}
+    \end{itemize}
+  % \item Usuwanie adnotacji:
+  %   \begin{itemize}
+  %   \item \key{h} (od ang. \textit{hide}); nie ma możliwości cofnięcia
+  %     tej operacji.
+  %   \end{itemize}
+  \item Wyswietlanie tekstu ukrytego: \key{Ctrl}+\key{t}.
+  \item Dostęp do fragmentu tekstu ukrytego:
+    \begin{itemize}
+    \item Wciśnięcie klawisza \texttt{Shift} wyświetla fragment tekstu
+      ukrytego znajdujący się pod kursorem (fragment jest ograniczony
+      przez strukturę tekstu zapisaną w dokumencie).
+    \end{itemize}
+  \end{itemize}
+  Następujące operacje dostępne sa tylko z menu \textsf{Widok}:
+  \begin{itemize}
+  \item Wyswietlanie wierne (jednemu pikselowi dokumentu odpowiada
+    jeden piksel na ekranie) --- \textsf{Wiernie}.
+  \end{itemize}
+
+\section{Panel kwerend}
+\label{sec:panel-kwerend}
+
+Panel ten wyświetla się z lewej strony ekranu; jego wyświetlanie można
+włączyć i wyłączyć z menu \textsf{Widok}. Jego szerokość może być
+zmieniana przez użytkownika za pomocą myszy.
+
+Zawiera on następujące elementy:
+\begin{itemize}
+\item Pole serwera
+\item Pole korpusu
+\item Pole kwerend
+\item Trzy podpanele:
+  \begin{itemize}
+  \item Podpanel wyników graficznych
+  \item Podpanel wyników tekstowych
+  \item Podpanel metadanych
+  \end{itemize}
+\item Przycisk \texttt{Więcej}
+\item Informacja o liczbie trafień znalezionych i wyświetlonych.
+\end{itemize}
+
+Informacja o aktualnie znalezionych trafieniach może być
+wyeksportowana w formacie cvs. Plik zawiera następujące pola
+oddzielone przecinkami, w razie potrzeby ujęte w cudzysłowy:
+\begin{enumerate}
+\item numer trafienia
+\item lewy kontekst
+\item lewe uzgodnienie
+\item prawe uzgodnienie
+\item prawy kontekst
+\item URL z zaznaczeniem trafienia
+\item tekst kwerendy
+\end{enumerate}
+
+\subsection{Pole serwera}
+\label{sec:pole-serwera}
+
+Pole serwera pozwala wybrać konkretny serwer z listy ustalonej w
+trakcie konfiguracji. Przycisk obok nazwy serwera wyswietla informację
+o serwerze.
+
+\subsection{Pole korpusu}
+\label{sec:pole-korpusu}
+
+Pole korpusu pozwala wybrać jeden z korpusów dostępnych na wybranym
+wcześniej serwerze. Dodatkowo dostępne są dwa przyciski. Jeden z nich
+wyświetla informację o korpusie, drugi pozwala zmienić domyślny sposób
+wyszukiwania. Dostępne są nastepujące opcje (są one przekazywane do
+programu \textsf{poliqarp}, w związku z tym są identyczne jak w innych
+korpusach obsługiwanych przez ten program, np. Narodowy Korpus Języka
+Polskiego):
+\begin{itemize}
+\item Ograniczenie przeszukiwania do losowej próbki i ustalenie jej wielkości.
+\item Sortowanie wyników (domyślnie są wyswietlane w kolejności
+  występowania w korpusie):
+  \begin{itemize}
+  \item według lewego lub prawego kontekstu, \textit{a fronte} lub
+    \textit{a tergo};
+  \item według ,,uzgodnienia'' (jeśli kwerenda jest podzielona na
+    części, to według lewego uzgodnienia), \textit{a fronte} lub
+    \textit{a tergo};
+  \item według prawego ,,uzgodnienia'', jeśli kwerenda jest
+    dwuczęściowa,
+  \item według prawego kontekstu,
+  \end{itemize}
+\item Sposób wyświetlania elementów tekstu, określany niezależnie dla
+  ,,uzgodnienia'' i kontekstu. Można włączyć lub wyłączyć
+  wyświetlanie:
+  \begin{itemize}
+  \item formy pierwotnej (w typowych korpusach to forma fleksyjna),
+  \item formy podstawowej (w typowych korpusach to forma hasłowa),
+  \item znaczników (w typowych korpusach opisujacych własności gramatyczne)
+  \end{itemize}
+\item Długośc kontekstu w jednostkach wyświetlanego w konkordancjach i
+  w oknie kontekstu.
+\end{itemize}
+
+\subsection{Pole kwerendy}
+\label{sec:pole-kwerendy}
+
+Program przekazuje kwerendy bez żadnych zmian do serwera, w związku z
+czym ich opisu należy szukać w innych źródłach, które były wspomniane
+we wstępie. Program przechowuje historię kwerend, zamiast wpisywać
+kwerendę od początku można wybrać juz użytą kwerendę i w razie
+potrzeby ją zmodyfikować..
+
+Najprostsza kwerenda to po prostu napis, np. \texttt{broda}. Należy
+pamiętać, że wielkość liter jest istotna, więc wyniki kwerend
+\texttt{broda} i \texttt{Broda} są różne.
+
+Dowolny element oznaczamy w kwerendzie jako \texttt{[]}. Oto jego
+użycie w kwerendzie dwuczęściowej (wskazane jest wybranie sortowania
+według prawego uzgodnienia): \verb|ku ^ []|.
+
+\subsection{Podpanel wyników tekstowych}
+\label{sec:podp-wynik-tekst}
+
+Ten podpanel można uznać za główny, wyświetla wyniki w formie
+konkordancji w sposób identyczny jak inne narzędzia wykorzystujące
+serwer \textsf{poliqarp}.
+
+Podwójne kliknięcie lewym klawiszem myszy na wiersz trafienia wyświetla jego obraz
+graficzny w głównym panelu.
+
+Pojedyncze kliknięcie kliknięcie lewym klawiszem myszy wybiera ten wiersz do następnych operacji:
+\begin{itemize}
+\item przejścia do okna metadanych, gdzie wyświetla się również dłuższy kontekst,
+\item jednoczesne naciśnięcie klawisza \key{Ctrl} i \key{Backspace}
+  usuwa z listy trafień ten wiersz jako nieinteresujący (nie ma
+  możliwości cofnięcia tej operacjiw inny sposób niż ponowne wykonanie
+  kwerendy).
+\item przejścia do okna wyników graficznych z zachowaniem dokonanego
+  wyboru (który może być niewidoczny).
+\end{itemize}
+
+Kliknięcie lewym klawiszem na numer trafienia wyświetla jego metadane
+bez zmiany zawartości panelu głównego.
+
+\subsection{Podpanel wynikow graficznych}
+\label{sec:podp-wynik-graf}
+
+Część funkcji jest analogiczna do panelu wyników tekstowych:
+
+Podwójne kliknięcie lewym klawiszem myszy na wiersz trafienia wyświetla jego obraz
+graficzny w głównym panelu.
+
+Pojedyncze kliknięcie kliknięcie lewym klawiszem myszy wybiera ten wiersz do następnych operacji:
+\begin{itemize}
+\item przejścia do okna metadanych, gdzie wyświetla się również dłuższy kontekst,
+\item jednoczesne naciśnięcie klawisza \key{Ctrl} i \key{Backspace}
+  usuwa z listy trafień ten wiersz jako nieinteresujący (nie ma
+  możliwości cofnięcia tej operacjiw inny sposób niż ponowne wykonanie
+  kwerendy).
+\item przejścia do okna wyników tekstowych z zachowaniem dokonanego
+  wyboru (który może być niewidoczny).
+\end{itemize}
+
+Kliknięcie lewym klawiszem na numer trafienia wyświetla jego metadane
+bez zmiany zawartości panelu głównego.
+
+Kliknięcie środkowym klawiszem myszy na tekst w bocznym panelu
+uruchamia nowy egzemplarz \textsf{djview4} wyświetlający odpowiednią
+stronę; pozwala to wykonać na tekście operacje aktualnie nie dostępne
+w \textsf{djview4poliqarp} --- np. wyświetlić tzw. konspekt
+(\textit{outline}).
+
+Każde z okienek podglądu graficznego działa podobnie, jak panel główny
+--- możliwe jest w szczególności pozycjonowanie tekstu.
+
+\subsection{Podpanel metadanych i kontekstu}
+\label{sec:podpanel-metadanych-i}
+
+Funkcja tego podpanelu jest oczywista, nie ma z nim związanych jakichś
+specjalnych funkcji poza widocznymi przyciskami \texttt{Poprzedni},
+\texttt{Następny}, \texttt{Usuń}. Jak w każdym panelu działa w nim
+zaznaczanie i kopiowanie tekstu. Kliknięcie ha hiperlink uruchamia
+\textsf{djview} z odpowiednim zaznaczeniem.
+
+% \item Pojedyncze kliknięcie lewym klawiszem myszy na tekst w bocznym
+%   panelu wybiera wskazany wynik i synchronizuje panele wyników
+%   graficznych, tekstowych i metadanych.
+
+
+
+\section{Panel indeksu}
+\label{sec:panel-indeksu}
+
+Panel ten wyświetla się z prawej strony ekranu; jego wyświetlanie
+można włączyć i wyłączyć z menu \textsf{Widok}. Jego szerokość może
+być zmieniana przez użytkownika za pomocą myszy.
+
+Zawiera on następujące elementy:
+\begin{itemize}
+\item Informacja o nazwie indeksu, jego ewentualne modyfikacji i liczbie haseł.
+\item Pole wyszukiwania przyrostowego haseł; domyślnie wyszukuje się
+  od początku wyrażenie hasłowego, ale jeśli wprowadzony zapis zaczyna
+  sie od znaku \texttt{*}, to wyszukuje się również podnapisy.
+\item Lista haseł; normalnie obok hasła wyświetla się rownież jego
+  opis (z wyjątkiem sortowania \textit{a tergo}).
+\item Pole komentarza, które można edytować; po edycji można przejść
+  do pola wyszukwiania za pomocą \key{Ctrl}+\key{f}.
+\item Pole stanu: ścieżka do aktualnie otwartego indeksu, numer strony
+  dokumentu wyświetlanej w panelu głównym,
+\end{itemize}
+
+Za pomocą menu głównego można wykonać następujące informacje na
+indeksie:
+\begin{itemize}
+\item Otwórz wskazany plik jako indeks,
+\item Otwórz ponownie jeden z ostatnio używanych indeksów
+\item Odśwież aktualnie otwarty indeks (w razie dokonania zmian w
+  pliku za pomocą innego programu)
+\item Otwórz plik i dodaj jego zawartość do indeksu
+\item Zapisz aktualnie otwarty indeks
+\item Zamknij aktualnie otwarty indeks
+\end{itemize} 
+
+Po wpisaniu w polu wyszukiwania pewnego napisu naciśnięcie klawisza
+\texttt{Enter} wyświetla cyklicznie kolejne hasła zaczynające sie od
+tego napisu. Po liście haseł można poruszać się również za pomocą
+strzałek w góre i w dół oraz klawiszy \texttt{Home} i \textup{End}.
+
+Dostępne w menu i za pomocą skrótów klawiaturowych \key{Alt} +
+strzałka w lewo i \key{Alt} + strzałka w prawo operacje przejścia do
+poprzedniego i następnego hasła nie odnoszą się do kolejności na
+liście haseł, ale do historii oglądania haseł.
+
+W trakcie zapisywania zmodyfikowanego indeksu początkowa wersja
+indeksu jest zachowana w formie kopii zapasowej. Jeśli otwartych było
+kilka plików, zapisywane są one jako jeden plik.
+
+Dodatkowe operacje są dostępne w menu podręcznym otwieranym przez
+kliknięcie prawym klawiszem na wybrane hasło. Sa to dwie operacje
+odnoszące się do wybranego hasła
+\begin{itemize}
+\item Edytuj hasło
+\item Oznacz jako usunięte (hasło zostanie usunięte dopiero przy
+  zapisywaniu indeksu)
+\end{itemize}
+oraz --- ze względów technicznych --- opcję odnoszącą sie do całego
+indeksu, czyli ,,Kolejność haseł''. Umozliwia ona wybór następujących
+sposobów ustalania kolejności:
+\begin{itemize}
+\item ,,Z pliku''
+\item  Alfabetyczne \textit{a fronte} ,,słowo po słowie''
+\item Alfabetyczne \textit{a fronte} ,,litera po literze''
+\item \textit{A tergo}
+\end{itemize}
+
+
+\section{Uwagi końcowe}
+\label{sec:uwagi-kocowe}
+
+Tekst ten jest udostępniony na licencji GNU FDL i nie ma charakteru
+ostatecznego. Żródła tekstu są dostępne w repozytorium
+\url{https://bitbucket.org/jsbien/ndt}, uwagi i propozycje zmian można
+zgłaszać za pomocą narzędzi dostępnych w tym repozytorium.
+
+\end{document}
+Do sprawdzenia:
+
+  % \item Obsługa odnośników (ang. \textit{links})
+  %   \begin{itemize}
+  %   \item Użycie odnośnika: pstryknięcie lewym klawiszem myszy
+  %   \item Pokazanie wszystkich odnośników na stronie: \key{Shift}
+  %   \end{itemize}
+
+%%% Local Variables: 
+%%% coding: utf-8-unix
+%%% mode: latex
+%%% TeX-master: t
+%%% TeX-PDF-mode: t
+%%% TeX-engine: xetex
+%%% End: 
+
+
