@@ -13,7 +13,7 @@
 
 \def\key#1{\textbf{#1}}
 
-\title{djview4poliqarp}
+\title{djview4poliqarp 2.0}
 \author{Janusz S. Bień}
 
 \date{\today}
@@ -77,6 +77,10 @@ Można wskazać język interfejsu na 3 sposoby:
 \item angielski
 \end{itemize}
 Efekt zmiany jest widoczny dopiero po ponownym uruchomieniu programu.
+
+Trzeba podkreślić, że zmiana języka interfejsu nie wpływa na sposób
+sortowania indeksu, który jest okreslony przez aktualne ustawienia
+regionalne.
 
 Można też wybrać kolor wyróżnienia wyników wyszukiwania.
 % a co z innymi?
@@ -519,15 +523,17 @@ odnoszące się do wybranego hasła
   zapisywaniu indeksu)
 \end{itemize}
 oraz --- ze względów technicznych --- opcję odnoszącą sie do całego
-indeksu, czyli ,,Kolejność haseł''. Umozliwia ona wybór następujących
+indeksu, czyli ,,Kolejność haseł''. Umożliwia ona wybór następujących
 sposobów ustalania kolejności:
 \begin{itemize}
 \item ,,Z pliku''
 \item  Alfabetyczne \textit{a fronte} ,,słowo po słowie''
 \item Alfabetyczne \textit{a fronte} ,,litera po literze''
-\item \textit{A tergo}
+\item \textit{A tergo} (nie wyświetlają sie opisy ze względów
+  technicznych)
 \end{itemize}
-
+W wyjątkiem ostatniej opcji wyszukiwanie przyrostowe działa zawsze od
+początku słowa; w razie wyboru \textit{a tergo} działa ono od końca.
 
 \section{Uwagi końcowe}
 \label{sec:uwagi-kocowe}
