@@ -1,0 +1,32 @@
+jsbien@zsb-i386:/media/MyBookT1/work/BitBucket/jbilinska/maleks_tekst$ hg pull --update
+http authorization required
+realm: Bitbucket.org HTTP
+user: jsbien
+password: 
+pulling from https://jsbien@bitbucket.org/jbilinska/maleks_tekst
+searching for changes
+adding changesets
+adding manifests
+adding file changes
+added 1 changesets with 4 changes to 4 files
+merging maleks.aux
+merge: warning: conflicts during merge
+merging maleks.aux failed!
+merging maleks.log
+merge: warning: conflicts during merge
+merging maleks.log failed!
+tool merge can't handle binary
+ no tool found to merge maleks.pdf
+keep (l)ocal or take (o)ther? o
+1 files updated, 1 files merged, 0 files removed, 2 files unresolved
+use 'hg resolve' to retry unresolved file merges
+jsbien@zsb-i386:/media/MyBookT1/work/BitBucket/jbilinska/maleks_tekst$ hg resolve
+abort: no files or directories specified; use --all to remerge all files
+jsbien@zsb-i386:/media/MyBookT1/work/BitBucket/jbilinska/maleks_tekst$ hg resolve --all
+merging maleks.aux
+merge: warning: conflicts during merge
+merging maleks.aux failed!
+merging maleks.log
+merge: warning: conflicts during merge
+merging maleks.log failed!
+jsbien@zsb-i386:/media/MyBookT1/work/BitBucket/jbilinska/maleks_tekst$ 
